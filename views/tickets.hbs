@@ -1,0 +1,23 @@
+<div class="container">
+  <h1 class="text-center">{{ title }}</h1>
+  {{#each tickets}}
+  <div class="card mb-4">
+
+    <div class="card-header d-flex align-items-center justify-content-between">
+      <h5>{{ name }}</h5>
+      <span class="badge badge-primary">{{worklogs.length}}</span>
+    </div>
+
+    <div class="card-body">
+      <p class="card-text">{{description}}</p>
+      <a class="btn btn-primary" href="/tickets/{{id}}/worklogs/new">Add worklog</a>
+    </div>
+
+    <div class="card-footer d-flex justify-content-between {{#if isEstimationExceeded}}bg-warning{{/if}}">
+      <span>Estimation: {{estimation}} hours</span>
+      <span>Logged: {{timeLogged}}</span>
+    </div>
+
+  </div>
+  {{/each}}
+</div>

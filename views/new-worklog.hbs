@@ -1,0 +1,29 @@
+{{#with ticket}}
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Add new worklog to <b>{{ name }}</b></h5>
+      <form class="row" method="POST" action="/tickets/{{id}}/worklogs/new">
+
+        <div class="input-group col-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">From</span>
+          </div>
+          <input required type="time" class="form-control" id="from" name="from">
+        </div>
+
+        <div class="input-group col-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">To</span>
+          </div>
+          <input required type="time" class="form-control" id="to" name="to">
+        </div>
+
+        <div class="col-6">
+          <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{{/with}}
