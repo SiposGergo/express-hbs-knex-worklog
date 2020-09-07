@@ -10,8 +10,10 @@ router.get('/', async (req, res, next) => {
 
   const ticketsWithWorklogs = tickets.map((t) => {
     const worklogsForTickets = worklogs.filter(w => w.ticket_id === t.id);
-    const timeLogged = worklogsForTickets.reduce((acc, curr) => acc +=
-      (createMillisecondsFromTimeString(curr.to) - createMillisecondsFromTimeString(curr.from)), 0);
+    let timeLogged = 0;
+    worklogsForTickets.forEach(worklog => {
+      timeLogged += (createMillisecondsFromTimeString(worklog.to) - createMillisecondsFromTimeString(worklog.from));
+    });
     return {
       ...t,
       isEstimationExceeded: timeLogged > t.estimation,
