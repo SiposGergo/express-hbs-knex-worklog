@@ -21,13 +21,21 @@ router.post('/new', async (req, res, next) => {
       message: 'Worklog is not valid!'
     });
   } else {
-    await knex('worklogs').insert({ ...dto, ticket_id: req.params.ticketId });
+    await knex('worklogs').insert({
+      ...dto,
+      ticket_id: req.params.ticketId,
+      duration: createMillisecondsFromTimeString(dto.to) - createMillisecondsFromTimeString(dto.from)
+    });
     res.redirect('/tickets');
   }
 });
 
 function isWorklogValid(dto) {
   return dto.from && dto.to;
+}
+
+function createMillisecondsFromTimeString(timeString) {
+  return +timeString.split(':')[0] * 60 * 60 * 1000 + +timeString.split(':')[1] * 60 * 1000;
 }
 
 module.exports = router;

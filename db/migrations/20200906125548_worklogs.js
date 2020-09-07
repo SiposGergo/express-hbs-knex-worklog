@@ -5,6 +5,7 @@ exports.up = function(knex) {
       table.increments();
       table.string('from');
       table.string('to');
+      table.integer('duration').unsigned();
       table.integer('ticket_id').unsigned().references('id').inTable('tickets');
   })
 };
